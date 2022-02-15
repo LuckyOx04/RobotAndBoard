@@ -6,9 +6,15 @@ namespace RobotAndBoard
     {
         static void Main(string[] args)
         {
-            Robot robot = new Robot();
-            robot.Walk();
-            robot.PrintLongestWalkStart();
+            try
+            {
+                Robot robot = new Robot();
+                robot.Walk();
+                robot.PrintLongestWalkStart();
+            }catch(Exception)
+            {
+                Console.WriteLine("Invalid input is given!");
+            }
         }
     }
 }
