@@ -31,6 +31,8 @@ namespace RobotAndBoard
             board.PrintBoard();
         }
 
+        //Prints the coordinates of the square from which the
+        //longest walk started
         public void PrintLongestWalkStart()
         {
             int x, y;
@@ -39,6 +41,7 @@ namespace RobotAndBoard
             Console.WriteLine($"Longest walk start is: {y}, {x}");
         }
 
+        //Reads a command and moves the robot
         void Move(char command)
         {
             switch (command)
@@ -62,7 +65,29 @@ namespace RobotAndBoard
             }
         }
 
-        public void Walk()
+        //The robot walks until it gets out of the board
+        //or it steps on an already stepped square and if
+        //that walk was the longest the start coordinates are saved.
+        void Walk(int i, int j)
+        {
+            while (!board.OutOfBoard(coordinate.x, coordinate.y) && !alreadyStepped.Contains((coordinate.x, coordinate.y)))
+            {
+                alreadyStepped.Add((coordinate.x, coordinate.y));
+                Move(board.ReturnCommand(coordinate.x, coordinate.y));
+            }
+
+            if (count > maxCount)
+            {
+                maxCount = count;
+                longestWalkStart.x = j;
+                longestWalkStart.y = i;
+            }
+            count = 0;
+            alreadyStepped.Clear();
+        }
+
+        //Starts walking from each square
+        public void GetLongestStart()
         {
             for(int i = 0; i < board.GetFieldLength(0); i++)
             {
@@ -71,25 +96,9 @@ namespace RobotAndBoard
                     coordinate.x = j;
                     coordinate.y = i;
 
-                    while (!board.OutOfBoard(coordinate.x, coordinate.y) && !alreadyStepped.Contains((coordinate.x, coordinate.y)))
-                    {
-                        alreadyStepped.Add((coordinate.x, coordinate.y));
-                        Move(board.ReturnCommand(coordinate.x, coordinate.y));
-                    }
-
-                    if(count > maxCount)
-                    {
-                        maxCount = count;
-                        longestWalkStart.x = j;
-                        longestWalkStart.y = i;
-                    }
-
-                    count = 0;
-                    alreadyStepped.Clear();
+                    Walk(i, j);
                 }
             }
-            
-            
         }
     }
 }

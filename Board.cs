@@ -11,6 +11,7 @@ namespace RobotAndBoard
         Random r = new Random();
         char[,] field;
 
+        //Creates a board with size N high and M wide.
         public Board(int n, int m)
         {
             field = new char[n, m];
@@ -24,6 +25,7 @@ namespace RobotAndBoard
             }
         }
 
+        //Prints the board
         public void PrintBoard()
         {
             for (int i = 0; i < field.GetLength(0); i++)
@@ -36,16 +38,19 @@ namespace RobotAndBoard
             }
         }
 
+        //Checks if coordinates are out of the board
         public bool OutOfBoard(int x, int y)
         {
             return x < 0 || x == field.GetLength(1) || y < 0 || y == field.GetLength(0);
         }
 
+        //Returns the command letter on the square with coordinates x and y
         public char ReturnCommand(int x, int y)
         {
             return field[y, x];
         }
 
+        //Retruns field Height if 0 and Width if 1
         public int GetFieldLength(int dimension)
         {
             if(dimension == 0)
@@ -58,6 +63,7 @@ namespace RobotAndBoard
             }
         }
 
+        //Converts num to command
         char IntToChar(int num)
         {
             switch (num)

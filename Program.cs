@@ -9,7 +9,7 @@ namespace RobotAndBoard
             try
             {
                 Robot robot = new Robot();
-                robot.Walk();
+                robot.GetLongestStart();
                 robot.PrintLongestWalkStart();
             }catch(Exception)
             {
