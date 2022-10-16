@@ -39,6 +39,7 @@ namespace RobotAndBoard
             x = longestWalkStart.x;
             y = longestWalkStart.y;
             Console.WriteLine($"Longest walk start is: {y}, {x}");
+			Console.WriteLine($"Walk length is: {maxCount} steps.");
         }
 
         //Reads a command and moves the robot
